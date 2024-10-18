@@ -38,4 +38,4 @@ jobs:
             git pull origin main &&
             npm install &&
             npm run build &&
-            pm2 restart next-app || npm start"
+            pm2 restart raps-solutions || npm start"
