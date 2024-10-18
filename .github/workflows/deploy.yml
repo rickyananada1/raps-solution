@@ -14,11 +14,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      # Set up SSH untuk VPS
+      # Set up SSH dengan versi terbaru
       - name: Set up SSH
-        uses: webfactory/ssh-agent@v0.5.3
+        uses: webfactory/ssh-agent@v0.5.5
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      # Test SSH connection to VPS
+      - name: Test SSH connection
+        run: ssh -o StrictHostKeyChecking=no root@202.10.35.65 "echo 'SSH connection successful!'"
 
       # Install dependencies dan build aplikasi Next.js
       - name: Install dependencies
@@ -34,4 +38,4 @@ jobs:
             git pull origin main &&
             npm install &&
             npm run build &&
-            pm2 restart next-app || npm start"
+            pm2 restart raps-solutions || npm start"
